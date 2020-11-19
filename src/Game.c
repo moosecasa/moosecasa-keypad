@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "config/configuration.h"
 
 struct internal{
     bool m_bRunning;
@@ -81,6 +82,13 @@ void HandleEvents(struct CGame* self)
     }
 }
 
+void LoadResources(struct CGame* self)
+{
+    struct Config* cfg = ParseConfig("config.cfg");
+    free(cfg);
+    cfg = NULL;
+}
+
 void Clean(struct CGame* self)
 {
     #ifdef DEBUG
@@ -107,6 +115,7 @@ int CGameInit(struct CGame* GameClass){
     GameClass->vt->Render = &Render;
     GameClass->vt->HandleEvents = &HandleEvents;
     GameClass->vt->Clean = &Clean;
+    GameClass->vt->LoadResources = &LoadResources;
     GameClass->vt->private->m_bRunning = false;
     
     return true;

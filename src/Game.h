@@ -14,6 +14,7 @@ typedef struct GameVT
     void (*Update)(struct CGame *self);
     void (*Render)(struct CGame *self);
     void (*HandleEvents)(struct CGame *self);
+    void (*LoadResources)(struct CGame *self);
     void (*Clean)(struct CGame *self);
     struct internal *private;
 } vtGame;
